@@ -15,7 +15,7 @@ export default async (options: {
 
   if (options.declaration) {
     execSync(
-      `cd ${functionsPath} && yarn tsc src/* --declaration --emitDeclarationOnly --outDir dist/types`
+      `cd ${functionsPath} && shopt -s globstar && yarn tsc src/**.ts src/**.tsx --declaration --emitDeclarationOnly --outDir dist`
     )
   }
 }
