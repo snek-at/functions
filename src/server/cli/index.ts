@@ -49,6 +49,11 @@ program
     'Path to functions directory',
     './functions'
   )
+  .option(
+    '--declaration',
+    'Generate declaration files (.d.ts) for the functions',
+    false
+  )
   .action(commands.build)
 
 program
