@@ -1,5 +1,4 @@
 #!/usr/bin/env -S node
-
 import {Command} from 'commander'
 import fs from 'fs'
 import path from 'path'
@@ -35,7 +34,11 @@ program
     'Watch the functions folder and build on changes (Should be disabled for production)',
     false
   )
-
+  .option(
+    '--forkmeDaddy <paths...>',
+    'Fork the process and run the given paths in the child process',
+    []
+  )
   .action(commands.server)
 
 program
