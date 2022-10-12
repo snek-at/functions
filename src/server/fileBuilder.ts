@@ -2,15 +2,19 @@ import {transformFile} from '@swc/core'
 import fs from 'fs'
 import path from 'path'
 
+import {replaceAll} from '../utils.js'
+
 export const buildFile = async (filePath: string, outputFilePath: string) => {
   const extname = path.extname(filePath)
 
   const {code} = await transformFile(filePath, {})
 
   // regex replace `import {fn} from './factory'` to `import {fn} from './factory.js'`
-  const transformedCode = code
-    .replaceAll(`'./factory'`, `'./factory.js'`)
-    .replaceAll(`"./factory"`, `"./factory.js"`)
+  const transformedCode = replaceAll(
+    replaceAll(code, `"./factory"`, `"./factory.js"`),
+    `'./factory'`,
+    `'./factory.js'`
+  )
 
   let newFilePath = outputFilePath
 
