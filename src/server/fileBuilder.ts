@@ -39,7 +39,7 @@ export const buildFolder = async (
   } catch {}
 
   try {
-    await fs.promises.mkdir(outputFolderPath)
+    await fs.promises.mkdir(outputFolderPath, {recursive: true})
   } catch {}
 
   for (const file of await fs.promises.readdir(folderPath)) {
@@ -63,12 +63,9 @@ export const buildFolder = async (
         await buildFile(fullPath, outputFilePath)
       } else {
         try {
-          await fs.promises.mkdir(path.dirname(outputFilePath), {
-            recursive: true
-          })
-
-          await fs.promises.cp(filePath, outputFilePath)
-        } catch {
+          await fs.promises.copyFile(filePath, outputFilePath)
+        } catch (err) {
+          console.error(err)
           console.warn(`Could not copy ${filePath} to ${outputFilePath}`)
         }
       }
