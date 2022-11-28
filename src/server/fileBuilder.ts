@@ -1,6 +1,7 @@
-import {transformFile} from '@swc/core'
 import fs from 'fs'
 import path from 'path'
+
+import {transformFile} from '@swc/core'
 
 import {replaceAll} from '../utils.js'
 
@@ -62,6 +63,10 @@ export const buildFolder = async (
         await buildFile(fullPath, outputFilePath)
       } else {
         try {
+          await fs.promises.mkdir(path.dirname(outputFilePath), {
+            recursive: true
+          })
+
           await fs.promises.cp(filePath, outputFilePath)
         } catch {
           console.warn(`Could not copy ${filePath} to ${outputFilePath}`)

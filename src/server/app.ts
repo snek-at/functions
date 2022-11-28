@@ -1,5 +1,6 @@
 import cookieParser from 'cookie-parser'
 import express from 'express'
+import {GraphQLSchema} from 'graphql'
 import {
   getGraphQLParameters,
   processRequest,
@@ -8,7 +9,6 @@ import {
   shouldRenderGraphiQL
 } from 'graphql-helix'
 
-import {GraphQLSchema} from 'graphql'
 import {buildFolder} from './fileBuilder.js'
 import {loadAppJs, loadModules} from './loader/index.js'
 import schemaBuilder from './schemaBuilder.js'
